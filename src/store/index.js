@@ -1,57 +1,47 @@
-import { createStore } from 'vuex'
+import Vuex from 'vuex'
+import createPersistedState from "vuex-persistedstate"
 
-export default createStore({
+const store = new Vuex.Store({
   state: {
+    counter: 0,
     todos: [],
     newTodo: '',
   },
   mutations: {
-    getTodo(state, todo){
-      state.newTodo = todo
-    },
-    addTodo(state){
+    addTodo(state, name) {
       state.todos.push({
-        body: state.newTodo,
-        completed: false
+        id: state.counter,
+        name: name,
+        completed: false,
       })
+      state.counter++
     },
-    editTodo(state, todo){
-       var todos = state.todos
-       todos.splice(todos.indexOf(todo), 1)
-       state.todos = todos
-       state.newTodo = todo.body
+    editTodo(state, editTodo) {
+      const index = state.todos.findIndex((todo) => todo.id === editTodo.id);
+      state.todos[index].name = editTodo.name;
     },
-    removeTodo(state, todo){
-       var todos = state.todos
-       todos.splice(todos.indexOf(todo), 1)
-    },
-    completeTodo(state, todo){
-      todo.completed = !todo.completed
-    },
-    clearTodo(state){
-      state.newTodo = ''
+    updateTodo(state, newVal) {
+      state.todos = newVal;
     }
   },
   actions: {
-    getTodo({commit}, todo){
-      commit('getTodo', todo)
-    },
-    addTodo({commit}){
-      commit('addTodo')
-    },
-    editTodo({commit}, todo){
-      commit('editTodo', todo)
-    },
-    removeTodo({commit}, todo){
-      commit('removeTodo', todo)
-    },
-    completeTodo({commit}, todo){
-     commit('completeTodo', todo)
-    },
-    clearTodo({commit}){
-      commit('clearTodo')
+    getTodos(state) {
+      return state.todos;
     }
   },
   modules: {
-  }
+  },
+  getters: {
+    todos(state) {
+      return state.todos;
+    },
+    newTodo(state) {
+      return state.newTodo;
+    },
+    remainingTodosCount: (state) => {
+      return state.todos.filter(todo => !todo.completed).length
+    },
+  },
+  plugins: [createPersistedState()]
 })
+export default store

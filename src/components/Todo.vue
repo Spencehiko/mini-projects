@@ -1,19 +1,18 @@
 <template>
   <div class="todoApp">
-    <p>{{ remainingTodo }} items remaining</p>
+    <p>{{ remainingTodosCount }} items remaining</p>
     <div class="addTodo">
       <input 
         class="todoName"
         type="text"
-        :value="newTodo"
-        @change="getTodo"
+        v-model="name"
         placeholder="I need to..."
       >
       <button class="button" @click="addTodo">
         <span>New</span>
       </button>
     </div>
-    <!-- <ul class="todoList">
+    <ul class="todoList">
       <li class="emptyList" v-if="!todoList.length">No Items Found</li>
       <li 
         v-for="todo in todoList" 
@@ -31,11 +30,12 @@
           type="text" 
           v-model="todo.name"
         >
-        <button @click="deleteTodo(todo.id)">Delete</button>
+        <button @click="removeTodo(todo.id)">Delete</button>
       </li>
     </ul>
-    <button class="clearButton" v-if="todoList.length" @click="clearCompleted">Clear Completed</button> -->
+    <button class="clearButton" v-if="todoList.length" @click="clearCompleted">Clear Completed</button>
   </div>
+  {{ todoList }}
 </template>
 
 <script>
@@ -45,25 +45,50 @@ export default {
   },
   data() {
     return {
-      counter: 1,
       name: '',
-      todoList: [],
+      editName: '',
     };
   },
   methods: {
-    getTodo(e){
-      this.$store.dispatch('getTodo', e.target.value)
-    },
     addTodo(){
-      this.$store.dispatch('addTodo')
-      this.$store.dispatch('clearTodo')
-    }
+      if(this.name.trim() === '') return this.name = '';
+      this.$store.commit('addTodo', this.name)
+      this.name = '';
+      /*
+      *TODO: this.$store.dispatch('clearTodoName')
+      */
+    },
+    removeTodo(id) {
+      this.todoList = this.todoList.filter((todo) => todo.id !== id);  
+    },
+    clearCompleted() {
+      this.todoList = this.todoList.filter((todo) => !todo.completed);
+    },
   },
   computed: {
-    newTodo(){
-      return this.$store.getters.newTodo
+    todoList: {
+      get() {
+        return this.$store.getters.todos;
+      },
+      set(newVal) {
+        this.$store.commit('updateTodo', newVal);
+      }
+    },
+    remainingTodosCount () {
+      return this.$store.getters.remainingTodosCount
+    },
+    newTodo() {
+      return this.$store.getters.newTodo;
     }
-  }
+  },
+  watch: {
+    todoList: {
+      handler(newVal) {
+        this.$store.commit('updateTodo', newVal);
+      },
+      deep: true
+    }
+  },
 }
 </script>
 
