@@ -1,0 +1,14 @@
+{
+    "rates": [
+      {
+        "date": "28/01/2022 00:02:23",
+        "rates": {
+            "USD_TRY": 13,
+            "EUR_TRY": 15,
+            "GBP_TRY": 18,
+            "CAD_TRY": 10,
+            "CNY_TRY": 2
+        }
+      }
+    ]
+}

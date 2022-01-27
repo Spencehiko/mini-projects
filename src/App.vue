@@ -1,17 +1,17 @@
 <template>
-  <div>
-    <Todo/>
+  <div id="nav">
+    <router-link to="/">Home</router-link> |
+    <router-link to="/currency-converter">Currency Converter</router-link>
   </div>
+  <router-view />
+  <!-- <div>
+    <Home/>
+  </div> -->
 </template>
 
 <script>
-import Todo from './components/Todo.vue'
-
 export default {
   name: 'App',
-  components: {
-    Todo
-  }
 }
 </script>
 
