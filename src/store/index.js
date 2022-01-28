@@ -48,7 +48,7 @@ const store = new Vuex.Store({
         const data = response.data;
         const lastUpdated = new Date(data[data.length-1].date);
         const differenceInMinutes = (new Date().getTime() - lastUpdated.getTime())/(60*1000);
-        if(differenceInMinutes > 5 && new Date().getHours() < 21 && new Date().getHours() > 10){
+        if(differenceInMinutes > 60 && new Date().getHours() < 21 && new Date().getHours() > 10){
           state.previousCurrencyRates = data[data.length-1];
           let results = [];
           // Since the API is in the free version, we cannot send all 6 currencies together. Maximum is 2 currencies per call.
