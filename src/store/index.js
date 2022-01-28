@@ -6,12 +6,12 @@ const store = new Vuex.Store({
   state: {
     apiKey: '862817c2e59bad7baf57',
     currencies: [
-      'USD',
-      'EUR',
-      'GBP',
-      'CAD',
-      'CNY',
-      'NOK',
+      'usd',
+      'eur',
+      'gbp',
+      'cad',
+      'cny',
+      'nok',
     ],
     currenciesWithTRY: [
       'USD_TRY',
@@ -48,7 +48,7 @@ const store = new Vuex.Store({
         const data = response.data;
         const lastUpdated = new Date(data[data.length-1].date);
         const differenceInMinutes = (new Date().getTime() - lastUpdated.getTime())/(60*1000);
-        if(differenceInMinutes > 60 && new Date().getHours() < 21 && new Date().getHours() > 10){
+        if(differenceInMinutes > 60){
           state.previousCurrencyRates = data[data.length-1];
           let results = [];
           // Since the API is in the free version, we cannot send all 6 currencies together. Maximum is 2 currencies per call.
@@ -86,7 +86,7 @@ const store = new Vuex.Store({
     },
     lastUpdateDate(state) {
       let date = new Date(state.currencyRates.date);
-      date = date.getDate() + '/' +  ("0" + (date.getMonth() + 1)).slice(-2)+ '/' + date.getFullYear() + ' ' + ("0" + date.getHours()).slice(-2) + ':' + date.getMinutes() + ':' + date.getSeconds()
+      date = date.getDate() + '/' +  ("0" + (date.getMonth() + 1)).slice(-2)+ '/' + date.getFullYear() + ' ' + ("0" + date.getHours()).slice(-2) + ':' + ("0" + date.getMinutes()).slice(-2)+ ':' + ("0" + date.getSeconds()).slice(-2)
       return date;
     },
   },

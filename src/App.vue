@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-black text-white md:h-screen md:max-h-screen max-h-full h-full">
+  <div class="bg-gray-800 text-white h-full min-h-screen relative">
     <div id="nav">
       <router-link to="/">Home</router-link> |
       <router-link to="/currency-converter">Currency Converter</router-link>

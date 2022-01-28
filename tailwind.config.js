@@ -1,14 +1,20 @@
+const plugin = require('tailwindcss/plugin')
+
 module.exports = {
-  content: ["./src/**/*.{html,js}"],
-  variants: {
-    margin: ['hover', 'first', 'last'],
-    padding: ['hover', 'first', 'last'],
-    border: ['hover', 'first', 'last'],
-    background: ['responsive', 'hover', 'first', 'last'],
-    bg: ['responsive', 'hover', 'first', 'last'],
-  },
+  mode: 'jit',
+  purge: ['./index.html', './src/**/*.{vue,js,ts,jsx,tsx}'],
+  darkMode: false, // or 'media' or 'class'
   theme: {
-    extend: {},
+    extend: {
+    },
+  },
+  variants: {
+    margin: ['hover', 'first', 'last', 'before', 'after'],
+    padding: ['hover', 'first', 'last'],
+    display: ['before', 'after'],
+    textColor: ['before', 'after'],
+    fontSize: ['before', 'after'],
+    backgroundColor: ['before', 'after'],
   },
   plugins: [],
 }
