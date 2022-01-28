@@ -1,9 +1,19 @@
 <template>
   <div class="home">
-    HOME
-    <h1 class="text-3xl font-bold">
-      Hello world!
-    </h1>
+    <div class="w-full flex text-center mt-5 border-b-2 border-t-2 border-solid border-white">
+      <div 
+        class="container border-r border-l border-dashed border-white"
+        :class="(previousCurrencyRates[index] > currencyRates[index]) ? 'bg-red-600 hover:bg-red-500' : 'bg-green-600 hover:bg-green-500'"
+        v-for="(item, index) in currencyRates" :key="index"
+      >
+        <h4>{{ currencies[index] }}</h4>
+        <p>{{ item }}</p>
+      </div>
+    </div>
+    <div class=" w-full pr-2 pt-1 border-b text-left">
+      <span>Rates of Currencies to TRY</span>
+      <span class="float-right">Last Updated: {{lastUpdateDate}}</span>
+    </div>
   </div>
 </template>
 
@@ -14,6 +24,7 @@ export default {
   },
   data() {
     return {
+
     };
   },
   mounted() {
@@ -22,8 +33,18 @@ export default {
   methods: {
   },
   computed: {
-  },
-  watch: {
+    currencyRates() {
+        return this.$store.getters.currencyRates;
+    },
+    previousCurrencyRates() {
+        return this.$store.getters.previousCurrencyRates;
+    },
+    lastUpdateDate() {
+        return this.$store.getters.lastUpdateDate;
+    },
+    currencies() {
+        return this.$store.state.currencies;
+    },
   },
 }
 </script>

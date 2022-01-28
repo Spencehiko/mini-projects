@@ -1,12 +1,11 @@
 <template>
-  <div id="nav">
-    <router-link to="/">Home</router-link> |
-    <router-link to="/currency-converter">Currency Converter</router-link>
+  <div class="bg-black text-white md:h-screen md:max-h-screen max-h-full h-full">
+    <div id="nav">
+      <router-link to="/">Home</router-link> |
+      <router-link to="/currency-converter">Currency Converter</router-link>
+    </div>
+    <router-view />
   </div>
-  <router-view />
-  <!-- <div>
-    <Home/>
-  </div> -->
 </template>
 
 <script>
