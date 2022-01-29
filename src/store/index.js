@@ -6,6 +6,7 @@ const store = new Vuex.Store({
   state: {
     apiKey: '862817c2e59bad7baf57',
     currencies: [
+      'try',
       'usd',
       'eur',
       'gbp',
@@ -27,7 +28,7 @@ const store = new Vuex.Store({
   },
   mutations: {
     async setCurrencyRates(state, newRates) {
-      let rates = [];
+      let rates = [1];
       newRates.forEach((allRates) => {
         for(let i in allRates){
           rates.push(allRates[i]);
@@ -79,10 +80,16 @@ const store = new Vuex.Store({
   },
   getters: {
     currencyRates(state) {
-      return state.currencyRates.rates;
+      if(state.currencyRates.length){
+        return state.currencyRates.rates.filter((curr, index) => index !== 0);
+      }
+      return [];
     },
     previousCurrencyRates(state) {
-      return state.previousCurrencyRates.rates;
+      if(state.previousCurrencyRates.length){
+        return state.previousCurrencyRates.rates.filter((curr, index) => index !== 0);
+      }
+      return [];
     },
     lastUpdateDate(state) {
       let date = new Date(state.currencyRates.date);

@@ -12,9 +12,10 @@ module.exports = {
     margin: ['hover', 'first', 'last', 'before', 'after'],
     padding: ['hover', 'first', 'last'],
     display: ['before', 'after'],
-    textColor: ['before', 'after'],
+    textColor: ['before', 'after', 'disabled'],
     fontSize: ['before', 'after'],
     backgroundColor: ['before', 'after'],
+    cursor: ['disabled']
   },
   plugins: [],
 }
