@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rock Paper Scissors</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <div class="selections">
+        <button class="selection" onclick="playRound(0)">✊</button>
+        <button class="selection" onclick="playRound(1)">✋</button>
+        <button class="selection" onclick="playRound(2)">✌️</button>
+    </div>
+    <div class="results">
+        <div>
+            You
+            <span class="result-score">0</span>
+        </div>
+        <div>
+            Computer
+            <span class="result-score">0</span>
+        </div>
+    </div>
+    <h3>Match History</h3>
+    <div class="matchHistory">
+    </div>
+</body>
+</html>
